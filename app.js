@@ -13,12 +13,21 @@ dotenv.config();
 const app = express();
 
 // MIDDLEWARE
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 // DB CONNECTION
 connectDB();
+
+// 👇 Add this before any route
+app.use(
+  cors({
+    origin: "https://employee-task-frontend.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // ROUTES
 app.use("/api/auth", authRoutes);
