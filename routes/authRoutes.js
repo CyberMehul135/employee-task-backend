@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Employee = require("../models/employee");
-const Admin = require("../models/admin");
+const Employee = require("../models/employee.js");
+const Admin = require("../models/admin.js");
 
 router.post("/login", async (req, res) => {
   const { userEmail, userPassword } = req.body;
@@ -15,6 +15,8 @@ router.post("/login", async (req, res) => {
       email: userEmail,
       password: userPassword,
     });
+
+    console.log(loggedInEmployee, loggedInAdmin);
 
     if (loggedInEmployee)
       return res.json({ message: "Successful", employee: loggedInEmployee });

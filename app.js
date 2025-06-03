@@ -8,10 +8,15 @@ dotenv.config();
 const app = express();
 
 // 👇 Add this before any route
+const allowedOrigins = [
+  "https://employee-task-frontend.vercel.app",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: "https://employee-task-frontend.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
 );
