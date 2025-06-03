@@ -9,16 +9,7 @@ const employeeRoutes = require("./routes/employeeRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
 
 dotenv.config();
-
 const app = express();
-
-// MIDDLEWARE
-// app.use(cors());
-app.use(express.json());
-app.use("/uploads", express.static("uploads"));
-
-// DB CONNECTION
-connectDB();
 
 // 👇 Add this before any route
 app.use(
@@ -28,6 +19,14 @@ app.use(
     credentials: true,
   })
 );
+
+// MIDDLEWARE
+// app.use(cors());
+app.use(express.json());
+app.use("/uploads", express.static("uploads"));
+
+// DB CONNECTION
+connectDB();
 
 // ROUTES
 app.use("/api/auth", authRoutes);
