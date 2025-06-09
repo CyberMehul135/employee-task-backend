@@ -7,9 +7,22 @@ const connectDB = require("./config/db");
 dotenv.config();
 const app = express();
 
+const allowedOrigins = [
+  "https://employee-task-frontend.vercel.app",
+  "http://localhost:5173",
+  undefined,
+];
+
 app.use(
   cors({
-    origin: "*",
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
