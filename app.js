@@ -7,22 +7,14 @@ const connectDB = require("./config/db");
 dotenv.config();
 const app = express();
 
-// 👇 Add this before any route
-const allowedOrigins = [
-  "https://employee-task-frontend.vercel.app",
-  "http://localhost:5173",
-];
-
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    credentials: true,
   })
 );
 
 // MIDDLEWARE
-// app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
